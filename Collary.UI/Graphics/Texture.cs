@@ -3,6 +3,7 @@ using Collary.UI.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,9 +24,27 @@ namespace Collary.UI.Graphics
             this.Pointer = handle;
         }
 
+        public Texture(IntPtr texture)
+        {
+            if (texture == IntPtr.Zero)
+                throw new NullReferenceException();
+
+            this.Pointer = texture;
+
+        }
+
         protected override void Destroy()
         {
             SDL.SDL_DestroyTexture(this.Pointer);
+        }
+
+        public Vector2 Size
+        {
+            get
+            {
+                SDL.SDL_QueryTexture(this.Pointer, out uint format, out int access, out int w, out int h);
+                return new Vector2(w, h);
+            }
         }
     }
 }
