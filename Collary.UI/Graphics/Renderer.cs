@@ -86,6 +86,128 @@ public class Renderer : Base
         SDL.SDL_RenderFillRectF(this.Pointer, ref dst);
     }
 
+    public Texture DrawTextSolid(string text, EncodingType encoding = EncodingType.Default)
+    {
+        IntPtr surface;
+
+        if (encoding == EncodingType.Unicode)
+        {
+            surface = TTF.TTF_RenderUNICODE_Solid(this.Font.Pointer, text, this.Color.SDL_Color);
+        }
+        else if (encoding == EncodingType.Utf8)
+        {
+            surface = TTF.TTF_RenderUTF8_Solid(this.Font.Pointer, text, this.Color.SDL_Color);
+        }
+        else
+        {
+            surface = TTF.TTF_RenderText_Solid(this.Font.Pointer, text, this.Color.SDL_Color);
+        }
+
+        return new Texture(SDL.SDL_CreateTextureFromSurface(this.Pointer, surface));
+    }
+
+    public Texture DrawTextSolidWrapped(string text, int wrap_length, EncodingType encoding = EncodingType.Default)
+    {
+        IntPtr surface;
+
+        if (encoding == EncodingType.Unicode)
+        {
+            surface = TTF.TTF_RenderUNICODE_Solid_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, (uint)wrap_length);
+        }
+        else if (encoding == EncodingType.Utf8)
+        {
+            surface = TTF.TTF_RenderUTF8_Solid_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, (uint)wrap_length);
+        }
+        else
+        {
+            surface = TTF.TTF_RenderText_Solid_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, (uint)wrap_length);
+        }
+
+        return new Texture(SDL.SDL_CreateTextureFromSurface(this.Pointer, surface));
+    }
+
+    public Texture DrawTextShaded(string text, Color bg, EncodingType encoding = EncodingType.Default)
+    {
+        IntPtr surface;
+
+        if (encoding == EncodingType.Unicode)
+        {
+            surface = TTF.TTF_RenderUNICODE_Shaded(this.Font.Pointer, text, this.Color.SDL_Color, bg.SDL_Color);
+        }
+        else if (encoding == EncodingType.Utf8)
+        {
+            surface = TTF.TTF_RenderUTF8_Shaded(this.Font.Pointer, text, this.Color.SDL_Color, bg.SDL_Color);
+        }
+        else
+        {
+            surface = TTF.TTF_RenderText_Shaded(this.Font.Pointer, text, this.Color.SDL_Color, bg.SDL_Color);
+        }
+
+        return new Texture(SDL.SDL_CreateTextureFromSurface(this.Pointer, surface));
+    }
+
+    public Texture DrawTextShadedWrapped(string text, int wrap_length, Color bg, EncodingType encoding = EncodingType.Default)
+    {
+        IntPtr surface;
+
+        if (encoding == EncodingType.Unicode)
+        {
+            surface = TTF.TTF_RenderUNICODE_Shaded_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, bg.SDL_Color, (uint)wrap_length);
+        }
+        else if (encoding == EncodingType.Utf8)
+        {
+            surface = TTF.TTF_RenderUTF8_Shaded_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, bg.SDL_Color, (uint)wrap_length);
+        }
+        else
+        {
+            surface = TTF.TTF_RenderText_Shaded_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, bg.SDL_Color, (uint)wrap_length);
+        }
+
+        return new Texture(SDL.SDL_CreateTextureFromSurface(this.Pointer, surface));
+    }
+
+    public Texture DrawTextBlended(string text, EncodingType encoding = EncodingType.Default)
+    {
+        IntPtr surface;
+
+        if (encoding == EncodingType.Unicode)
+        {
+            surface = TTF.TTF_RenderUNICODE_Blended(this.Font.Pointer, text, this.Color.SDL_Color);
+        }
+        else if (encoding == EncodingType.Utf8)
+        {
+            surface = TTF.TTF_RenderUTF8_Blended(this.Font.Pointer, text, this.Color.SDL_Color);
+        }
+        else
+        {
+            surface = TTF.TTF_RenderText_Blended(this.Font.Pointer, text, this.Color.SDL_Color);
+        }
+
+        return new Texture(SDL.SDL_CreateTextureFromSurface(this.Pointer, surface));
+    }
+
+    public Texture DrawTextBlendedWrapped(string text, int wrap_length, EncodingType encoding = EncodingType.Default)
+    {
+        IntPtr surface;
+
+        if (encoding == EncodingType.Unicode)
+        {
+            surface = TTF.TTF_RenderUNICODE_Blended_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, (uint)wrap_length);
+        }
+        else if (encoding == EncodingType.Utf8)
+        {
+            surface = TTF.TTF_RenderUTF8_Blended_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, (uint)wrap_length);
+        }
+        else
+        {
+            surface = TTF.TTF_RenderText_Blended_Wrapped(this.Font.Pointer, text, this.Color.SDL_Color, (uint)wrap_length);
+        }
+
+        return new Texture(SDL.SDL_CreateTextureFromSurface(this.Pointer, surface));
+    }
+
+    public Font Font { get; set; }
+
     public Color Color
     {
         get

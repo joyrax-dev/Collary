@@ -3,6 +3,7 @@ using Collary.UI.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,6 +41,28 @@ public class Font : Base
 
         Font.FontsCount++;
         return handle;
+    }
+
+    public Vector2 TextSize(string text, EncodingType encoding = EncodingType.Default)
+    {
+        Vector2 size;
+        if (encoding == EncodingType.Default)
+        {
+            TTF.TTF_SizeText(this.Pointer, text, out int w, out int h);
+            size = new Vector2(w, h);
+        }
+        else if (encoding == EncodingType.Utf8)
+        {
+            TTF.TTF_SizeUTF8(this.Pointer, text, out int w, out int h);
+            size = new Vector2(w, h);
+        }
+        else
+        {
+            TTF.TTF_SizeUNICODE(this.Pointer, text, out int w, out int h);
+            size = new Vector2(w, h);
+        }
+
+        return size;
     }
 
     protected override void Destroy()
