@@ -50,7 +50,7 @@ public interface IEventable
     public event EventHandler<AudioDeviceEventArgs> AudioDeviceConnect;
     public event EventHandler<AudioDeviceEventArgs> AudioDeviceDisconnect;
 
-    // Call Section
+    // Callers Section
     public void OnClose(object sender);
     public void OnResize(object sender, SizeEventArgs e);
     public void OnSizeChange(object sender, SizeEventArgs e);

@@ -14,7 +14,7 @@ public class Font : Base
     public static bool HasTTFInitialize { get; private set; } = false;
     public static int FontsCount { get; private set; } = 0;
 
-    public static int DefaultFontSize { get; set; } = 8;
+    public static int DefaultFontSize { get; set; } = 14;
 
     public Font(string path_to_font, int pt_size)
     {
@@ -74,6 +74,58 @@ public class Font : Base
         {
             TTF.TTF_Quit();
             Font.HasTTFInitialize = false;
+        }
+    }
+
+    public int Height
+    {
+        get
+        {
+            return TTF.TTF_FontHeight(this.Pointer);
+        }
+    }
+
+    public FontStyle Style
+    {
+        get
+        {
+            return ((FontStyle)TTF.TTF_GetFontStyle(this.Pointer));
+        }
+        set
+        {
+            TTF.TTF_SetFontStyle(this.Pointer, ((int)value));
+        }
+    }
+
+    public int Outline
+    {
+        get
+        {
+            return TTF.TTF_GetFontOutline(this.Pointer);
+        }
+        set
+        {
+            TTF.TTF_SetFontOutline(this.Pointer, value);
+        }
+    }
+
+    public FontHinting Hinting
+    {
+        get
+        {
+            return ((FontHinting)TTF.TTF_GetFontHinting(this.Pointer));
+        }
+        set
+        {
+            TTF.TTF_SetFontHinting(this.Pointer, ((int)value));
+        }
+    }
+
+    public string FamilyName
+    {
+        get
+        {
+            return TTF.TTF_FontFaceFamilyName(this.Pointer);
         }
     }
 }

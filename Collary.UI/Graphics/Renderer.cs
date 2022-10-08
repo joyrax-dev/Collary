@@ -18,6 +18,7 @@ public class Renderer : Base
             throw new RendererCreationException();
 
         this.Pointer = handle;
+        this.Color = new Color(0, 0, 0, 255);
     }
 
     protected override void Destroy()
@@ -90,6 +91,9 @@ public class Renderer : Base
     {
         IntPtr surface;
 
+        if (this.Font == null)
+            throw new NullReferenceException("Font null reference");
+
         if (encoding == EncodingType.Unicode)
         {
             surface = TTF.TTF_RenderUNICODE_Solid(this.Font.Pointer, text, this.Color.SDL_Color);
@@ -109,6 +113,9 @@ public class Renderer : Base
     public Texture DrawTextSolidWrapped(string text, int wrap_length, EncodingType encoding = EncodingType.Default)
     {
         IntPtr surface;
+
+        if (this.Font == null)
+            throw new NullReferenceException("Font null reference");
 
         if (encoding == EncodingType.Unicode)
         {
@@ -130,6 +137,9 @@ public class Renderer : Base
     {
         IntPtr surface;
 
+        if (this.Font == null)
+            throw new NullReferenceException("Font null reference");
+
         if (encoding == EncodingType.Unicode)
         {
             surface = TTF.TTF_RenderUNICODE_Shaded(this.Font.Pointer, text, this.Color.SDL_Color, bg.SDL_Color);
@@ -149,6 +159,9 @@ public class Renderer : Base
     public Texture DrawTextShadedWrapped(string text, int wrap_length, Color bg, EncodingType encoding = EncodingType.Default)
     {
         IntPtr surface;
+
+        if (this.Font == null)
+            throw new NullReferenceException("Font null reference");
 
         if (encoding == EncodingType.Unicode)
         {
@@ -170,6 +183,9 @@ public class Renderer : Base
     {
         IntPtr surface;
 
+        if (this.Font == null)
+            throw new NullReferenceException("Font null reference");
+
         if (encoding == EncodingType.Unicode)
         {
             surface = TTF.TTF_RenderUNICODE_Blended(this.Font.Pointer, text, this.Color.SDL_Color);
@@ -189,6 +205,9 @@ public class Renderer : Base
     public Texture DrawTextBlendedWrapped(string text, int wrap_length, EncodingType encoding = EncodingType.Default)
     {
         IntPtr surface;
+
+        if (this.Font == null)
+            throw new NullReferenceException("Font null reference");
 
         if (encoding == EncodingType.Unicode)
         {
