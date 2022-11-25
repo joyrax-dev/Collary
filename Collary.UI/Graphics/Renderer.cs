@@ -65,9 +65,14 @@ public class Renderer : Base
         SDL.SDL_RenderCopy(this.Pointer, texture.Pointer, ref src, ref dst);
     }
 
-    public void DrawLine(Vector2 start, Vector2 end)
+    public void DrawLine(Vector2 start, Vector2 end, bool anti_aliased = false)
     {
-        SDL.SDL_RenderDrawLineF(this.Pointer, start.X, start.Y, end.X, end.Y);
+        if (!anti_aliased)
+            SDL.SDL_RenderDrawLineF(this.Pointer, start.X, start.Y, end.X, end.Y);
+        else
+            GFX.aalineRGBA(this.Pointer,
+                ((short)start.X), ((short)start.Y), ((short)end.X), ((short)end.Y),
+                this.Color.R, this.Color.G, this.Color.B, this.Color.A);
     }
 
     public void DrawPoint(Vector2 point)
@@ -81,10 +86,40 @@ public class Renderer : Base
         SDL.SDL_RenderDrawRectF(this.Pointer, ref dst);
     }
 
+    public void DrawRectRounded(Rect rect, short rad)
+    {
+        GFX.roundedRectangleRGBA(this.Pointer, 
+            ((short)rect.X), ((short)rect.Y), ((short)rect.Width), ((short)rect.Height), 
+            rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);
+    }
+
     public void DrawFillRect(Rect rect)
     {
         SDL.SDL_FRect dst = rect.SDL_FRect;
         SDL.SDL_RenderFillRectF(this.Pointer, ref dst);
+    }
+
+    public void DrawFillRectRounded(Rect rect, short rad)
+    {
+        GFX.roundedBoxRGBA(this.Pointer, 
+            ((short)rect.X), ((short)rect.Y), ((short)rect.Width), ((short)rect.Height), 
+            rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);
+    }
+
+    public void DrawCircle(Vector2 position, short rad, bool anti_aliased = false)
+    {
+        if (!anti_aliased)
+            GFX.circleRGBA(this.Pointer, ((short)position.X), ((short)position.Y),
+            rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);
+        else
+            GFX.aacircleRGBA(this.Pointer, ((short)position.X), ((short)position.Y),
+            rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);
+    }
+
+    public void DrawFillCircle(Vector2 position, short rad)
+    {
+        GFX.filledCircleRGBA(this.Pointer, ((short)position.X), ((short)position.Y),
+            rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);
     }
 
     public Texture DrawTextSolid(string text, EncodingType encoding = EncodingType.Default)
