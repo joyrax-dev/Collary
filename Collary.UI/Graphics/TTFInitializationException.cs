@@ -9,4 +9,3 @@ public class TTFInitializationException : Exception
 {
     public TTFInitializationException() : base($"TTF Initialization error! \nMessage: {SDL.SDL_GetError()}") { }
 }
-}
