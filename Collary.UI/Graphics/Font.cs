@@ -11,10 +11,10 @@ namespace Collary.UI.Graphics;
 
 public class Font : Base
 {
-    public static bool HasTTFInitialize { get; private set; } = false;
-    public static int FontsCount { get; private set; } = 0;
+    protected static bool HasTTFInitialize { get; private set; } = false;
+    protected static int FontsCount { get; private set; } = 0;
 
-    public static int DefaultFontSize { get; set; } = 14;
+    public static int DefaultFontSize { get; set; } = 16;
 
     public Font(string path_to_font, int pt_size)
     {
