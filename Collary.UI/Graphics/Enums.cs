@@ -26,3 +26,10 @@ public enum FontStyle : int
     Underline     = TTF.TTF_STYLE_UNDERLINE,
     StrikeThrough = TTF.TTF_STYLE_STRIKETHROUGH
 }
+
+public enum DrawType
+{
+    Solid,
+    Shaded,
+    Blended
+}
