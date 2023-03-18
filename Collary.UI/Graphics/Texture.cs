@@ -23,17 +23,7 @@ public class Texture : Base
 
         this.Pointer = handle;
     }
-
-    public Texture(Surface surface, Renderer renderer)
-    {
-        IntPtr handle = SDL.SDL_CreateTextureFromSurface(surface.Pointer, renderer.Pointer);
-
-        if (handle == IntPtr.Zero)
-            throw new TextureCreationException();
-
-        this.Pointer = handle;
-    }
-
+    
     public Texture(IntPtr texture)
     {
         if (texture == IntPtr.Zero)

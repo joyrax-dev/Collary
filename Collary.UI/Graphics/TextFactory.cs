@@ -31,7 +31,7 @@ public class TextFactory
         if (this.Font == null)
             throw new NullReferenceException("Font null reference");
         
-        Surface surface;
+        nint surface;
 
         if (this.Wrapped)
         {
@@ -39,45 +39,45 @@ public class TextFactory
             {
                 if (this.DrawType == DrawType.Solid)
                 {
-                    surface = new Surface(TTF.TTF_RenderUTF8_Solid_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderUTF8_Solid_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength);
                 }
                 else if (this.DrawType == DrawType.Shaded)
                 {
-                    surface = new Surface(TTF.TTF_RenderUTF8_Shaded_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderUTF8_Shaded_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color, this.WrapLength);
                 }
                 else
                 {
-                    surface = new Surface(TTF.TTF_RenderUTF8_Blended_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderUTF8_Blended_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength);
                 }
             }
             else if (this.Encoding == EncodingType.Unicode)
             {
                 if (this.DrawType == DrawType.Solid)
                 {
-                    surface = new Surface(TTF.TTF_RenderUNICODE_Solid_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderUNICODE_Solid_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength);
                 }
                 else if (this.DrawType == DrawType.Shaded)
                 {
-                    surface = new Surface(TTF.TTF_RenderUNICODE_Shaded_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderUNICODE_Shaded_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color, this.WrapLength);
                 }
                 else
                 {
-                    surface = new Surface(TTF.TTF_RenderUNICODE_Blended_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderUNICODE_Blended_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength);
                 }
             }
             else
             {
                 if (this.DrawType == DrawType.Solid)
                 {
-                    surface = new Surface(TTF.TTF_RenderText_Solid_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderText_Solid_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength);
                 }
                 else if (this.DrawType == DrawType.Shaded)
                 {
-                    surface = new Surface(TTF.TTF_RenderText_Shaded_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderText_Shaded_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color, this.WrapLength);
                 }
                 else
                 {
-                    surface = new Surface(TTF.TTF_RenderText_Blended_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength));
+                    surface = TTF.TTF_RenderText_Blended_Wrapped(this.Font.Pointer, text, this.Forceground.SDL_Color, this.WrapLength);
                 }
             }
         }
@@ -87,49 +87,52 @@ public class TextFactory
             {
                 if (this.DrawType == DrawType.Solid)
                 {
-                    surface = new Surface(TTF.TTF_RenderUTF8_Solid(this.Font.Pointer, text, this.Forceground.SDL_Color));
+                    surface = TTF.TTF_RenderUTF8_Solid(this.Font.Pointer, text, this.Forceground.SDL_Color);
                 }
                 else if (this.DrawType == DrawType.Shaded)
                 {
-                    surface = new Surface(TTF.TTF_RenderUTF8_Shaded(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color));
+                    surface = TTF.TTF_RenderUTF8_Shaded(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color);
                 }
                 else
                 {
-                    surface = new Surface(TTF.TTF_RenderUTF8_Blended(this.Font.Pointer, text, this.Forceground.SDL_Color));
+                    surface = TTF.TTF_RenderUTF8_Blended(this.Font.Pointer, text, this.Forceground.SDL_Color);
                 }
             }
             else if (this.Encoding == EncodingType.Unicode)
             {
                 if (this.DrawType == DrawType.Solid)
                 {
-                    surface = new Surface(TTF.TTF_RenderUNICODE_Solid(this.Font.Pointer, text, this.Forceground.SDL_Color));
+                    surface = TTF.TTF_RenderUNICODE_Solid(this.Font.Pointer, text, this.Forceground.SDL_Color);
                 }
                 else if (this.DrawType == DrawType.Shaded)
                 {
-                    surface = new Surface(TTF.TTF_RenderUNICODE_Shaded(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color));
+                    surface = TTF.TTF_RenderUNICODE_Shaded(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color);
                 }
                 else
                 {
-                    surface = new Surface(TTF.TTF_RenderUNICODE_Blended(this.Font.Pointer, text, this.Forceground.SDL_Color));
+                    surface = TTF.TTF_RenderUNICODE_Blended(this.Font.Pointer, text, this.Forceground.SDL_Color);
                 }
             }
             else
             {
                 if (this.DrawType == DrawType.Solid)
                 {
-                    surface = new Surface(TTF.TTF_RenderText_Solid(this.Font.Pointer, text, this.Forceground.SDL_Color));
+                    surface = TTF.TTF_RenderText_Solid(this.Font.Pointer, text, this.Forceground.SDL_Color);
                 }
                 else if (this.DrawType == DrawType.Shaded)
                 {
-                    surface = new Surface(TTF.TTF_RenderText_Shaded(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color));
+                    surface = TTF.TTF_RenderText_Shaded(this.Font.Pointer, text, this.Forceground.SDL_Color, this.Background.SDL_Color);
                 }
                 else
                 {
-                    surface = new Surface(TTF.TTF_RenderText_Blended(this.Font.Pointer, text, this.Forceground.SDL_Color));
+                    surface = TTF.TTF_RenderText_Blended(this.Font.Pointer, text, this.Forceground.SDL_Color);
                 }
             }
         }
 
-        return new Texture(surface, this.RefRen);
+        Texture tex = new Texture(SDL.SDL_CreateTextureFromSurface(this.RefRen.Pointer, surface));
+        SDL.SDL_FreeSurface(surface);
+
+        return tex;
     }
 }
