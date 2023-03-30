@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collary.Native", "Collary.Native\Collary.Native.csproj", "{8314AA5F-0282-4557-8556-1FFA43B52A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collary.UI", "Collary.UI\Collary.UI.csproj", "{AABB5F4E-7610-46AF-8BA5-3499321E6D39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collary", "Collary\Collary.csproj", "{AABB5F4E-7610-46AF-8BA5-3499321E6D39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

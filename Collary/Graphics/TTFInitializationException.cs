@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Collary.UI.Graphics;
+namespace Collary.Graphics;
 
 [Serializable]
 public class TTFInitializationException : Exception

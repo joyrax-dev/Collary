@@ -1,6 +1,6 @@
 using Collary.Native.SDL2;
 
-namespace Collary.UI.Graphics;
+namespace Collary.Graphics;
 
 public enum EncodingType
 {

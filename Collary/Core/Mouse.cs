@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collary.UI.System;
+namespace Collary.Core;
 
 public enum Button : byte // TODO: Move to the Mouse.cs
 {

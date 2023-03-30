@@ -1,10 +1,10 @@
 using Collary.Native.SDL2;
-using Collary.UI.System;
-using Collary.UI.Windowing;
+using Collary.Core;
+using Collary.Windowing;
 using System;
 using System.Numerics;
 
-namespace Collary.UI.Graphics;
+namespace Collary.Graphics;
 
 public class TextFactory
 {

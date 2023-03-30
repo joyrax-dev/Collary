@@ -1,9 +1,9 @@
 ﻿using Collary.Native.SDL2;
-using Collary.UI.System;
+using Collary.Core;
 using System;
 using System.Numerics;
 
-namespace Collary.UI.Windowing;
+namespace Collary.Windowing;
 
 public class Window : Base, IEventable
 {

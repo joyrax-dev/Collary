@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Collary.UI.Windowing;
+namespace Collary.Windowing;
 
 // TODO: Add Constructors
 public struct WindowContext

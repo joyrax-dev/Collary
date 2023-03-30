@@ -1,7 +1,7 @@
 ﻿using Collary.Native.SDL2;
 using System;
 
-namespace Collary.UI.Windowing;
+namespace Collary.Windowing;
 
 [Serializable]
 public class WindowCreationException : Exception

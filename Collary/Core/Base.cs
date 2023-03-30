@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collary.UI.System;
+namespace Collary.Core;
 
 public class Base : IDisposable
 {
-    public IntPtr Pointer { get; set; }
+    public nint Pointer { get; set; }
 
-    public Base() : this(IntPtr.Zero) { }
+    public Base() : this(nint.Zero) { }
 
-    public Base(IntPtr pointer)
+    public Base(nint pointer)
     {
         this.Pointer = pointer;
     }

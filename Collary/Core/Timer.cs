@@ -1,5 +1,5 @@
 using Collary.Native.SDL2;
-using Collary.UI.System;
+using Collary.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collary.UI.System;
+namespace Collary.Core;
 
 public class Timer
 {

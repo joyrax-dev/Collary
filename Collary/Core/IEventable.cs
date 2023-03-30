@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Collary.UI.Windowing;
+using Collary.Windowing;
 
-namespace Collary.UI.System;
+namespace Collary.Core;
 
 public interface IEventable
 {

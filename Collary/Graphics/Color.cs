@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collary.UI.Graphics;
+namespace Collary.Graphics;
 
 public class Color
 {

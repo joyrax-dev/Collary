@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collary.UI.System;
+namespace Collary.Core;
 
 public struct Rect
 {

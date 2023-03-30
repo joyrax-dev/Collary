@@ -1,43 +1,25 @@
 ﻿using Collary.Native.SDL2;
-using Collary.UI.Windowing;
+using Collary.Windowing;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Collary.UI.System;
+namespace Collary.Core;
 
 public class EventHost : Base
 {
-    public static bool HasEventsInitialize { get; private set; } = false;
-    public static int HostsCount { get; private set; } = 0;
-
-    private List<IEventable> Targets { get; set; }
+    protected List<IEventable> Targets { get; set; }
 
     public EventHost()
     {
-        if (!EventHost.HasEventsInitialize)
-            if (SDL.SDL_InitSubSystem(SDL.SDL_INIT_EVENTS) != 0)
-                throw new EventsInitializationException();
-            else
-                EventHost.HasEventsInitialize = true;
+        EventHost.InitializeEvents();
 
         this.Targets = new List<IEventable>();
-
-        EventHost.HostsCount++;
     }
 
     public void AddTarget(IEventable target)
     {
         this.Targets.Add(target);
-    }
-
-    protected override void Destroy()
-    {
-        EventHost.HostsCount--;
-        if (EventHost.HostsCount <= 0)
-        {
-            SDL.SDL_QuitSubSystem(SDL.SDL_INIT_EVENTS);
-            EventHost.HasEventsInitialize = false;
-        }
     }
 
     public void Dispatch()
@@ -155,4 +137,36 @@ public class EventHost : Base
                 break;
         }
     }
+
+    #region Initialize and Destroy SDL Event Subsystem
+    protected static bool HasEventsInitialize { get; private set; } = false;
+    protected static int HostsCount { get; private set; } = 0;
+
+    protected static void InitializeEvents()
+    {
+        if (!EventHost.HasEventsInitialize)
+            if (SDL.SDL_InitSubSystem(SDL.SDL_INIT_EVENTS) != 0)
+                throw new EventsInitializationException();
+            else
+                EventHost.HasEventsInitialize = true;
+        
+        EventHost.HostsCount++;
+    }
+
+    protected override void Destroy()
+    {
+        EventHost.HostsCount--;
+        if (EventHost.HostsCount <= 0)
+        {
+            SDL.SDL_QuitSubSystem(SDL.SDL_INIT_EVENTS);
+            EventHost.HasEventsInitialize = false;
+        }
+    }
+    #endregion
+}
+
+[Serializable]
+public class EventsInitializationException : Exception
+{
+    public EventsInitializationException() : base($"Events Initialization error! \nMessage: {SDL.SDL_GetError()}") { }
 }
