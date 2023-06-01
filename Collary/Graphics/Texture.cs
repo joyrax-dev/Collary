@@ -37,12 +37,12 @@ public class Texture : Base
         SDL.SDL_DestroyTexture(this.Pointer);
     }
 
-    public Vector2 Size
+    public Vector2i Size
     {
         get
         {
             SDL.SDL_QueryTexture(this.Pointer, out uint format, out int access, out int w, out int h);
-            return new Vector2(w, h);
+            return new Vector2i(w, h);
         }
     }
 }

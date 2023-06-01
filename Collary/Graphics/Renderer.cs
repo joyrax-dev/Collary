@@ -10,15 +10,20 @@ public class Renderer : Base
 {
     public Renderer(Window window)
     {
+        this.Pointer = Renderer.CreateRenderer(window);
+        this.Color = new Color(0, 0, 0, 255);
+    }
+
+    protected static IntPtr CreateRenderer(Window window)
+    {
         IntPtr handle = SDL.SDL_CreateRenderer(window.Pointer, -1,
             SDL.SDL_RendererFlags.SDL_RENDERER_TARGETTEXTURE
             | SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED);
 
         if (handle == IntPtr.Zero)
             throw new RendererCreationException();
-
-        this.Pointer = handle;
-        this.Color = new Color(0, 0, 0, 255);
+        
+        return handle;
     }
 
     protected override void Destroy()
@@ -44,15 +49,15 @@ public class Renderer : Base
         SDL.SDL_RenderPresent(this.Pointer);
     }
 
-    public void Draw(Texture texture, Vector2 position)
+    public void Draw(Texture texture, Vector2i position)
     {
-        Vector2 texture_size = texture.Size;
+        Vector2i texture_size = texture.Size;
         SDL.SDL_Rect dst = new SDL.SDL_Rect()
         {
-            x = ((int)position.X),
-            y = ((int)position.Y),
-            w = ((int)texture_size.X),
-            h = ((int)texture_size.Y)
+            x = position.X,
+            y = position.Y,
+            w = texture_size.X,
+            h = texture_size.Y
 
         };
         SDL.SDL_RenderCopy(this.Pointer, texture.Pointer, IntPtr.Zero, ref dst);
@@ -65,7 +70,7 @@ public class Renderer : Base
         SDL.SDL_RenderCopy(this.Pointer, texture.Pointer, ref src, ref dst);
     }
 
-    public void DrawLine(Vector2 start, Vector2 end, bool anti_aliased = false)
+    public void DrawLine(Vector2i start, Vector2i end, bool anti_aliased = false)
     {
         if (!anti_aliased)
             SDL.SDL_RenderDrawLineF(this.Pointer, start.X, start.Y, end.X, end.Y);
@@ -75,7 +80,7 @@ public class Renderer : Base
                 this.Color.R, this.Color.G, this.Color.B, this.Color.A);
     }
 
-    public void DrawPoint(Vector2 point)
+    public void DrawPoint(Vector2f point)
     {
         SDL.SDL_RenderDrawPointF(this.Pointer, point.X, point.Y);
     }
@@ -106,7 +111,7 @@ public class Renderer : Base
             rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);
     }
 
-    public void DrawCircle(Vector2 position, short rad, bool anti_aliased = false)
+    public void DrawCircle(Vector2i position, short rad, bool anti_aliased = false)
     {
         if (!anti_aliased)
             GFX.circleRGBA(this.Pointer, ((short)position.X), ((short)position.Y),
@@ -116,7 +121,7 @@ public class Renderer : Base
             rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);
     }
 
-    public void DrawFillCircle(Vector2 position, short rad)
+    public void DrawFillCircle(Vector2i position, short rad)
     {
         GFX.filledCircleRGBA(this.Pointer, ((short)position.X), ((short)position.Y),
             rad, this.Color.R, this.Color.G, this.Color.B, this.Color.A);

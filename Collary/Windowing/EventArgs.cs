@@ -59,12 +59,12 @@ public class MouseButtonEventArgs : EventArgs
 {
     public Button Button;
     public byte Clicks;
-    public Vector2 Position;
+    public Vector2i Position;
 
     public MouseButtonEventArgs(SDL.SDL_MouseButtonEvent e)
     {
         this.Clicks = e.clicks;
-        this.Position = new Vector2(e.x, e.y);
+        this.Position = new Vector2i(e.x, e.y);
 
         switch (e.button)
         {
@@ -94,13 +94,13 @@ public class MouseButtonEventArgs : EventArgs
 public class MouseMoveEventArgs : EventArgs
 {
     public Button Button;
-    public Vector2 Position;
-    public Vector2 RelativePosition;
+    public Vector2i Position;
+    public Vector2i RelativePosition;
 
     public MouseMoveEventArgs(SDL.SDL_MouseMotionEvent e)
     {
-        this.Position = new Vector2(e.x, e.y);
-        this.RelativePosition = new Vector2(e.xrel, e.yrel);
+        this.Position = new Vector2i(e.x, e.y);
+        this.RelativePosition = new Vector2i(e.xrel, e.yrel);
 
         switch (e.state)
         {
@@ -130,13 +130,13 @@ public class MouseMoveEventArgs : EventArgs
 public class MouseWheelScrollEventArgs : EventArgs
 {
     public WheelDirection Direction;
-    public Vector2 PreciseVector;
+    public Vector2f PreciseVector;
 
     public MouseWheelScrollEventArgs(SDL.SDL_MouseWheelEvent e)
     {
         if (e.direction == (uint)SDL.SDL_MouseWheelDirection.SDL_MOUSEWHEEL_NORMAL)
         {
-            this.PreciseVector = new Vector2(e.preciseX, e.preciseY);
+            this.PreciseVector = new Vector2f(e.preciseX, e.preciseY);
 
             if (e.y > 0)
                 this.Direction = WheelDirection.Up;
@@ -146,7 +146,7 @@ public class MouseWheelScrollEventArgs : EventArgs
         }
         else if (e.direction == (uint)SDL.SDL_MouseWheelDirection.SDL_MOUSEWHEEL_FLIPPED)
         {
-            this.PreciseVector = new Vector2(e.preciseX * -1, e.preciseY * -1);
+            this.PreciseVector = new Vector2f(e.preciseX * -1, e.preciseY * -1);
 
             if (e.y < 0)
                 this.Direction = WheelDirection.Up;

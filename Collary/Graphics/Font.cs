@@ -16,14 +16,18 @@ public class Font : Base
 
     public static int DefaultFontSize { get; set; } = 16;
 
+    protected int FontSize { get; set; }
+
     public Font(string path_to_font, int pt_size)
     {
         this.Pointer = Font.OpenFont(path_to_font, pt_size);
+        this.FontSize = pt_size;
     }
 
     public Font(string path_to_font)
     {
         this.Pointer = Font.OpenFont(path_to_font, Font.DefaultFontSize);
+        this.FontSize = Font.DefaultFontSize;
     }
 
     protected static IntPtr OpenFont(string path_to_font, int pt_size)
@@ -43,23 +47,23 @@ public class Font : Base
         return handle;
     }
 
-    public Vector2 TextSize(string text, EncodingType encoding = EncodingType.Default)
+    public Vector2i TextSize(string text, EncodingType encoding = EncodingType.Default)
     {
-        Vector2 size;
+        Vector2i size;
         if (encoding == EncodingType.Default)
         {
             TTF.TTF_SizeText(this.Pointer, text, out int w, out int h);
-            size = new Vector2(w, h);
+            size = new Vector2i(w, h);
         }
         else if (encoding == EncodingType.Utf8)
         {
             TTF.TTF_SizeUTF8(this.Pointer, text, out int w, out int h);
-            size = new Vector2(w, h);
+            size = new Vector2i(w, h);
         }
         else
         {
             TTF.TTF_SizeUNICODE(this.Pointer, text, out int w, out int h);
-            size = new Vector2(w, h);
+            size = new Vector2i(w, h);
         }
 
         return size;
@@ -74,6 +78,19 @@ public class Font : Base
         {
             TTF.TTF_Quit();
             Font.HasTTFInitialize = false;
+        }
+    }
+
+    public int Size
+    {
+        get
+        {
+            return this.FontSize;
+        }
+        set
+        {
+            TTF.TTF_SetFontSize(this.Pointer, value);
+            this.FontSize = value;
         }
     }
 

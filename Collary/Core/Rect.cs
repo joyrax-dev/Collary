@@ -25,7 +25,7 @@ public struct Rect
         this.Height = height;
     }
 
-    public Rect(Vector2 position, Vector2 size) : this(position.X, position.Y, size.X, size.Y) { }
+    public Rect(Vector2f position, Vector2f size) : this(position.X, position.Y, size.X, size.Y) { }
 
     public Rect(SDL.SDL_Rect rect) : this(rect.x, rect.y, rect.w, rect.h) { }
 

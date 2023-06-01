@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Collary.Core;
 
 namespace Collary.Windowing;
 
@@ -7,8 +8,8 @@ public struct WindowContext
 {
     public float Opacity       { get; set; }
 
-    public Vector2 MaximumSize { get; set; }
-    public Vector2 MinimumSize { get; set; }
+    public Vector2i MaximumSize { get; set; }
+    public Vector2i MinimumSize { get; set; }
 
     public bool Resizable      { get; set; }
     public bool StartupHidden  { get; set; }
@@ -24,8 +25,8 @@ public struct WindowContext
     {
         this.Opacity = 1.0f;
 
-        this.MaximumSize = new Vector2(1920, 1080);
-        this.MinimumSize = new Vector2(300, 300);
+        this.MaximumSize = new Vector2i(1920, 1080);
+        this.MinimumSize = new Vector2i(300, 300);
 
         this.Resizable = true;
         this.StartupHidden = false;

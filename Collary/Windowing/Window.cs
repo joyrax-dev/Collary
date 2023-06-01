@@ -2,6 +2,7 @@
 using Collary.Core;
 using System;
 using System.Numerics;
+using Collary.Graphics;
 
 namespace Collary.Windowing;
 
@@ -9,47 +10,53 @@ public class Window : Base, IEventable
 {
     public static bool HasVideoInitialize { get; private set; } = false;
     public static int WindowCount { get; private set; } = 0;
+    
+    public Renderer Renderer { get; protected set; }
 
-    public Window(string title, Vector2 position, Vector2 size) : base()
+    public Window(string title, Vector2i position, Vector2i size) : base()
     {
         WindowContext context = new WindowContext();
-        IntPtr handle = Window.CreateWindow(title, (int)position.X, (int)position.Y, (int)size.X,
-                (int)size.Y, context);
+        IntPtr handle = Window.CreateWindow(title, position.X, position.Y, size.X,
+                size.Y, context);
 
         this.Pointer = handle;
 
         Window.ConfigurateWindow(this.Pointer, context);
+        this.Renderer = new Renderer(this);
     }
 
-    public Window(string title, Vector2 position, Vector2 size, WindowContext context) : base()
+    public Window(string title, Vector2i position, Vector2i size, WindowContext context) : base()
     {
-        IntPtr handle = Window.CreateWindow(title, (int)position.X, (int)position.Y, (int)size.X,
-                (int)size.Y, context);
+        IntPtr handle = Window.CreateWindow(title, position.X, position.Y, size.X,
+                size.Y, context);
 
         this.Pointer = handle;
 
         Window.ConfigurateWindow(this.Pointer, context);
+        this.Renderer = new Renderer(this);
     }
 
-    public Window(string title, WindowPosition position, Vector2 size) : base()
+    public Window(string title, WindowPosition position, Vector2i size) : base()
     {
         WindowContext context = new WindowContext();
-        IntPtr handle = Window.CreateWindow(title, (int)position, (int)position, (int)size.X,
-                (int)size.Y, context);
+        IntPtr handle = Window.CreateWindow(title, (int)position, (int)position, size.X,
+                size.Y, context);
 
         this.Pointer = handle;
 
         Window.ConfigurateWindow(this.Pointer, context);
+        this.Renderer = new Renderer(this);
     }
 
-    public Window(string title, WindowPosition position, Vector2 size, WindowContext context) : base()
+    public Window(string title, WindowPosition position, Vector2i size, WindowContext context) : base()
     {
-        IntPtr handle = Window.CreateWindow(title, (int)position, (int)position, (int)size.X,
-                (int)size.Y, context);
+        IntPtr handle = Window.CreateWindow(title, (int)position, (int)position, size.X,
+                size.Y, context);
 
         this.Pointer = handle;
 
         Window.ConfigurateWindow(this.Pointer, context);
+        this.Renderer = new Renderer(this);
     }
 
     public event EventHandler Close = null;
@@ -156,8 +163,8 @@ public class Window : Base, IEventable
 
     protected static void ConfigurateWindow(IntPtr window, WindowContext context)
     {
-        SDL.SDL_SetWindowMaximumSize(window, (int)context.MaximumSize.X, (int)context.MaximumSize.Y);
-        SDL.SDL_SetWindowMinimumSize(window, (int)context.MinimumSize.X, (int)context.MinimumSize.Y);
+        SDL.SDL_SetWindowMaximumSize(window, context.MaximumSize.X, context.MaximumSize.Y);
+        SDL.SDL_SetWindowMinimumSize(window, context.MinimumSize.X, context.MinimumSize.Y);
         SDL.SDL_SetWindowOpacity(window, context.Opacity);
     }
 
@@ -353,29 +360,29 @@ public class Window : Base, IEventable
         }
     }
 
-    public Vector2 Size
+    public Vector2i Size
     {
         get 
         {
             SDL.SDL_GetWindowSize(this.Pointer, out int w, out int h);
-            return new Vector2(w, h);
+            return new Vector2i(w, h);
         }
         set 
         {
-            SDL.SDL_SetWindowSize(this.Pointer, (int)value.X, (int)value.Y);
+            SDL.SDL_SetWindowSize(this.Pointer, value.X, value.Y);
         }
     }
 
-    public Vector2 Position
+    public Vector2i Position
     {
         get 
         {
             SDL.SDL_GetWindowPosition(this.Pointer, out int x, out int y);
-            return new Vector2(x, y);
+            return new Vector2i(x, y);
         }
         set 
         {
-            SDL.SDL_SetWindowSize(this.Pointer, (int)value.X, (int)value.Y);
+            SDL.SDL_SetWindowSize(this.Pointer, value.X, value.Y);
         }
     }
 
@@ -391,29 +398,29 @@ public class Window : Base, IEventable
         }
     }
 
-    public Vector2 MinimumSize
+    public Vector2i MinimumSize
     {
         get 
         {
             SDL.SDL_GetWindowMinimumSize(this.Pointer, out int w, out int h);
-            return new Vector2(w, h);
+            return new Vector2i(w, h);
         }
         set 
         {
-            SDL.SDL_SetWindowMinimumSize(this.Pointer, (int)value.X, (int)value.Y);
+            SDL.SDL_SetWindowMinimumSize(this.Pointer, value.X, value.Y);
         }
     }
 
-    public Vector2 MaximumSize
+    public Vector2i MaximumSize
     {
         get 
         {
             SDL.SDL_GetWindowMaximumSize(this.Pointer, out int w, out int h);
-            return new Vector2(w, h);
+            return new Vector2i(w, h);
         }
         set 
         {
-            SDL.SDL_SetWindowMaximumSize(this.Pointer, (int)value.X, (int)value.Y);
+            SDL.SDL_SetWindowMaximumSize(this.Pointer, value.X, value.Y);
         }
     }
 

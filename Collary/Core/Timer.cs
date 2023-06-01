@@ -31,6 +31,14 @@ public class Timer
         }
     }
 
+    public float FromSeconds
+    {
+        get
+        {
+            return this.Ticks / 1000.0f;
+        }
+    }
+
     public void Start()
     {
         this.Started = true;
