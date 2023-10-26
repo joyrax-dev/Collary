@@ -1,7 +1,6 @@
 ﻿using Collary.Framework.Core;
 using Collary.Framework.Windowing;
 using Collary.Native.SDL;
-using SharpGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +28,8 @@ public class Renderer : Base
 
         if (handle == nint.Zero)
             throw new RendererCreationException();
+
+        SDL.SDL_SetHint(SDL.SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
         return handle;
     }
